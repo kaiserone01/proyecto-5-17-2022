@@ -86,6 +86,12 @@ def listapersonajes():
         map(lambda personaje: personaje.serialize(), personajes))
     return jsonify(personajes_serializado), 200
 
+@app.route('/personajes/<int:personajes_id>', methods=['GET'])
+def listapersonajesid(personajes_id):
+    personajes = Personajes.query.get(personajes_id)
+    return jsonify(personajes.serialize()), 200
+    
+
 
 @app.route('/planetas', methods=['POST'])
 def create_planeta():
@@ -114,6 +120,11 @@ def listadeplanetas():
     planeta_serializado = list(
         map(lambda planeta: planeta.serialize(), planeta))
     return jsonify(planeta_serializado), 200
+
+@app.route('/planetas/<int:planeta_id>', methods=['GET'])
+def listaplanetasid(planeta_id):
+    planeta = Planeta.query.get(planeta_id)
+    return jsonify(planeta.serialize()), 200
 
 
 @app.route('/')
